@@ -1,6 +1,14 @@
 #ifndef __CLASS_H__
 #define __CLASS_H__
 
+#include <stdlib.h>
+#include <errno.h>
+
+int   arralloc(int, struct Class *);
+void  init_fields(int, struct Class *);
+void  free_fields(int, struct Class *);
+void  arrfree(struct Class *);
+
 struct Class {
   int weekday;        /* День недели [0..6], 0 - ПН, 6 - ВС */
   int time;           /* Время начала в минутах 00:00 - 0, 23:59 - 1439 */
