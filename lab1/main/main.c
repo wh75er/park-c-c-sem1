@@ -10,4 +10,5 @@ main(int argc, char *argv[]) {
   struct class* arr = NULL;
   int size;
   int err = get_user_input(stdin, &size, &arr);
+  arrfree(size, arr);
 }

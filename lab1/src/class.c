@@ -47,6 +47,8 @@ free_fields(const int size, struct class* arr) {
  * Высвобождает память массива.
  */
 void
-arrfree(struct class* arr) {
+arrfree(const int size, struct class* arr) {
+  free_fields(size, arr);
   free(arr);
+  arr = NULL;
 }

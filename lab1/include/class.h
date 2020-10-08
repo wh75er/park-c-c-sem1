@@ -19,6 +19,6 @@ struct class {
 int   arralloc(const int, struct class**);
 void  init_fields(const int, struct class*);
 void  free_fields(const int, struct class*);
-void  arrfree(struct class*);
+void  arrfree(int, struct class*);
 
 #endif
