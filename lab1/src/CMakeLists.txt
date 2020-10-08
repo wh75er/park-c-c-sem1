@@ -1,0 +1,8 @@
+add_library(input_lib input.c)
+add_library(class_lib class.c)
+
+target_include_directories(input_lib PUBLIC ../include)
+target_include_directories(class_lib PUBLIC ../include)
+
+target_compile_features(input_lib PUBLIC cxx_std_11)
+target_compile_features(class_lib PUBLIC cxx_std_11)
