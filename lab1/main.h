@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include "input.h"
+#include "class.h"
+
 int   main(int, char**);
 
 #endif
