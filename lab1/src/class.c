@@ -6,13 +6,13 @@
  * ошибки возвращает errno, в случае успеха 0;
  */
 int
-arralloc(int n, struct Class* arr) {
-  arr = (struct Class*)malloc(n * sizeof(struct Class));
-  if (!arr) {
+arralloc(const int size, struct class** arr) {
+  *arr = (struct class*)malloc(size * sizeof(struct class));
+  if (!(*arr)) {
     return errno;
   }
 
-  init_fields(arr);
+  init_fields(size, *arr);
 
   return 0;
 }
@@ -22,8 +22,8 @@ arralloc(int n, struct Class* arr) {
  * NULL значением
  */
 void
-init_fields(int n, struct Class* arr) {
-  for (int i = 0; i < n; i++) {
+init_fields(const int size, struct class* arr) {
+  for (int i = 0; i < size; i++) {
     arr[i].subject = NULL;
     arr[i].professor = NULL;
   }
@@ -34,8 +34,8 @@ init_fields(int n, struct Class* arr) {
  * затирает значения указателей значением NULL
  */
 void
-free_fields(int n, struct Class* arr) {
-  for (int i = 0; i < n; i++) {
+free_fields(const int size, struct class* arr) {
+  for (int i = 0; i < size; i++) {
     free(arr[i].subject);
     free(arr[i].professor);
     arr[i].subject = NULL;
@@ -47,6 +47,6 @@ free_fields(int n, struct Class* arr) {
  * Высвобождает память массива.
  */
 void
-arrfree(struct Class* arr) {
+arrfree(struct class* arr) {
   free(arr);
 }

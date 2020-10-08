@@ -2,14 +2,10 @@
 #define __CLASS_H__
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <errno.h>
 
-int   arralloc(int, struct Class *);
-void  init_fields(int, struct Class *);
-void  free_fields(int, struct Class *);
-void  arrfree(struct Class *);
-
-struct Class {
+struct class {
   int weekday;        /* День недели [0..6], 0 - ПН, 6 - ВС */
   int time;           /* Время начала в минутах 8:30 - 510, 20:30 - 1230 */
   bool lecture;       /* Лекция или семинар? */
@@ -18,6 +14,11 @@ struct Class {
   char* professor;    /* Имя профессора */
   int year;           /* Курс(год) обучения */
   int group;          /* Номер группы */
-}
+};
 
-#endif __CLASS_H__
+int   arralloc(const int, struct class**);
+void  init_fields(const int, struct class*);
+void  free_fields(const int, struct class*);
+void  arrfree(struct class*);
+
+#endif

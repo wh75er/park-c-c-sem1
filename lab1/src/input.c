@@ -4,7 +4,7 @@
  * Получение пользовательских данных
  */
 int
-get_user_input(FILE* stream, int* size, struct Class* arr) {
+get_user_input(FILE* stream, int* size, struct class** arr) {
   printf("Пожалуйста, введите размер массива: ");
   int err = 0;
   if ((err = get_value_from_stream(stream, size))) {
@@ -12,7 +12,7 @@ get_user_input(FILE* stream, int* size, struct Class* arr) {
     return err;
   }
 
-  if ((err = get_array_from_stream(stream, size, arr))) {
+  if ((err = get_array_from_stream(stream, *size, arr))) {
     fprintf(stderr, "Возникла ошибка при чтении расписания!\n");
     return err;
   }
@@ -44,7 +44,7 @@ get_value_from_stream(FILE* stream, int* val) {
       return errno;
     }
 
-    fflush_stream();
+    fflush_stream(stream);
     if (errno) {
       fprintf(stderr, "Возникла ошибка при чистке буфера потока!\n");
       return errno;
@@ -80,7 +80,7 @@ get_string_from_stream(FILE* stream, char* str) {
       return errno;
     }
 
-    fflush_stream();
+    fflush_stream(stream);
     if (errno) {
       fprintf(stderr, "Возникла ошибка при чистке буфера потока!\n");
       free(str);
@@ -99,8 +99,9 @@ int
 get_weekday_from_stream(FILE* stream, int* weekday) {
   printf("Введите день недели[0-ПН, 6-ВС]: ");
   *weekday = -1;
+  int err = 0;
   for (;;) {
-    if ((int err = get_value_from_stream(stream, &weekday))) {
+    if ((err = get_value_from_stream(stream, weekday))) {
       return err;
     }
 
@@ -121,8 +122,9 @@ int
 get_time_from_stream(FILE* stream, int* time) {
   printf("Введите время начала занятия в минутах[8:30 - 510, 20:30 - 1230]: ");
   *time = -1;
+  int err = 0;
   for (;;) {
-    if ((int err = get_value_from_stream(stream, &time))) {
+    if ((err = get_value_from_stream(stream, time))) {
       return err;
     }
 
@@ -143,8 +145,9 @@ int
 get_lecture_from_stream(FILE* stream, bool* lecture) {
   printf("Введите тип занятия[0 - семинар, 1 - лекция]: ");
   int type = -1;
+  int err = 0;
   for (;;) {
-    if ((int err = get_value_from_stream(stream, &type))) {
+    if ((err = get_value_from_stream(stream, &type))) {
       return err;
     }
 
@@ -159,14 +162,35 @@ get_lecture_from_stream(FILE* stream, bool* lecture) {
   return 0;
 }
 
+int
+get_duration_from_stream(FILE* stream, int* duration) {
+  printf("Введите время продолжительности занятия в минутах[5 - 90]: ");
+  *duration = -1;
+  int err = 0;
+  for (;;) {
+    if ((err = get_value_from_stream(stream, duration))) {
+      return err;
+    }
+
+    if (*duration < 5 || *duration > 90) {
+      printf("Ваше значение не удовлетворяет условию. Пожалуйста, введите корректное число[5, 90]: ");
+    } else {
+      break;
+    }
+  }
+
+  return 0;
+}
+
 /*
  * Заполнение названия предмета
  */
 int
 get_subject_from_stream(FILE* stream, char* subject) {
   printf("Введите название предмета: ");
-  char* subject;
-  if ((int err = get_string_from_stream(stream, &subject))) {
+  subject = NULL;
+  int err = 0;
+  if ((err = get_string_from_stream(stream, subject))) {
     return err;
   }
 
@@ -179,8 +203,9 @@ get_subject_from_stream(FILE* stream, char* subject) {
 int
 get_professor_from_stream(FILE* stream, char* professor) {
   printf("Введите имя преподавателя: ");
-  char* professor;
-  if ((int err = get_string_from_stream(stream, &professor))) {
+  professor = NULL;
+  int err = 0;
+  if ((err = get_string_from_stream(stream, professor))) {
     return err;
   }
 
@@ -194,8 +219,9 @@ int
 get_year_from_stream(FILE* stream, int* year) {
   printf("Введите курс: ");
   *year = -1;
+  int err = 0;
   for (;;) {
-    if ((int err = get_value_from_stream(stream, &year))) {
+    if ((err = get_value_from_stream(stream, year))) {
       return err;
     }
 
@@ -216,8 +242,9 @@ int
 get_group_from_stream(FILE* stream, int* group) {
   printf("Введите номер группы: ");
   *group = -1;
+  int err = 0;
   for (;;) {
-    if ((int err = get_value_from_stream(stream, &group))) {
+    if ((err = get_value_from_stream(stream, group))) {
       return err;
     }
 
@@ -235,9 +262,9 @@ get_group_from_stream(FILE* stream, int* group) {
  * Заполнение одного объекта из потока по указателю
  */
 int
-get_object_from_stream(FILE* stream, struct Class* obj) {
-  int err;
+get_object_from_stream(FILE* stream, struct class* obj) {
   int weekday = -1;
+  int err = 0;
   if ((err = get_weekday_from_stream(stream, &weekday))) {
     fprintf(stderr, "Возникла ошибка при чтении дня недели!\n");
     return err;
@@ -273,21 +300,21 @@ get_object_from_stream(FILE* stream, struct Class* obj) {
   (*obj).subject = subject;
 
   char* professor = NULL;
-  if ((err = get_subject_from_stream(stream, professor))) {
+  if ((err = get_professor_from_stream(stream, professor))) {
     fprintf(stderr, "Возникла ошибка при чтении имени преподавателя!\n");
     return err;
   }
   (*obj).professor = professor;
 
   int year = -1;
-  if ((err = get_subject_from_stream(stream, &year))) {
+  if ((err = get_year_from_stream(stream, &year))) {
     fprintf(stderr, "Возникла ошибка при чтении номера курса!\n");
     return err;
   }
   (*obj).year = year;
 
   int group = -1;
-  if ((err = get_subject_from_stream(stream, &group))) {
+  if ((err = get_group_from_stream(stream, &group))) {
     fprintf(stderr, "Возникла ошибка при чтении номера группы!\n");
     return err;
   }
@@ -300,15 +327,15 @@ get_object_from_stream(FILE* stream, struct Class* obj) {
  * Выделение памяти под массив и его заполнение из потока
  */
 int
-get_array_from_stream(FILE* stream, int size, struct Class* arr) {
-  int err;
+get_array_from_stream(FILE* stream, const int size, struct class** arr) {
+  int err = 0;
   if ((err = arralloc(size, arr))) {
     fprintf(stderr, "Возникла ошибка при выделении памяти под массив!\n");
     return err;
   }
 
   for (int i = 0; i < size; i++) {
-    if((err = get_object_from_stream(stream, &arr[i]))) {
+    if((err = get_object_from_stream(stream, &(*arr)[i]))) {
       fprintf(stderr, "Возникла ошибка при заполнении массива!\n");
       return err;
     }

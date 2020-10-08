@@ -7,7 +7,7 @@
  */
 int
 main(int argc, char *argv[]) {
-  struct Class* arr = NULL;
+  struct class* arr = NULL;
   int size;
-  int err = get_user_input(stdin, &size, arr);
+  int err = get_user_input(stdin, &size, &arr);
 }
