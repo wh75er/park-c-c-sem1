@@ -27,28 +27,18 @@ int
 get_value_from_stream(FILE* stream, int* val) {
   bool is_number = false;
   while (is_number == false) {
-    char buffer[BUFFER_SIZE];
-    if (!fgets(buffer, BUFFER_SIZE, stream)) {
-      fprintf(stderr, "Возникла ошибка при заполнения буфера из потока!\n");
-      return errno;
-    }
-
-    int n = sscanf(buffer, " %d", val);
+    int n = fscanf(stream, "%d", val);
 
     if (n == 1) {
       is_number = true;
     } else if (!errno)  {
-      printf("Введенное вами значение не является числом. Повторите...\n");
+      printf("Введенное вами значение не является числом. Повторите: ");
     } else {
       fprintf(stderr, "Возникла ошибка при считывании значения!\n");
       return errno;
     }
 
     fflush_stream(stream);
-    if (errno) {
-      fprintf(stderr, "Возникла ошибка при чистке буфера потока!\n");
-      return errno;
-    }
   }
 
   return 0;
@@ -59,20 +49,14 @@ get_value_from_stream(FILE* stream, int* val) {
  */
 int
 get_string_from_stream(FILE* stream, char* str) {
-  bool is_number = false;
-  while (is_number == false) {
-    char buffer[BUFFER_SIZE];
-    if (!fgets(buffer, BUFFER_SIZE, stream)) {
-      fprintf(stderr, "Возникла ошибка при заполнения буфера из потока!\n");
-      return errno;
-    }
-
-    int n = sscanf(buffer, " %ms", str);
+  bool is_string = false;
+  while (is_string == false) {
+    int n = fscanf(stream, "%ms", &str);
 
     if (n == 1) {
-      is_number = true;
+      is_string = true;
     } else if (!errno)  {
-      printf("Введенное вами значение не является строкой. Повторите...\n");
+      printf("Введенное вами значение не является строкой. Повторите: ");
     } else {
       fprintf(stderr, "Возникла ошибка при считывании значения!\n");
       free(str);
@@ -81,12 +65,6 @@ get_string_from_stream(FILE* stream, char* str) {
     }
 
     fflush_stream(stream);
-    if (errno) {
-      fprintf(stderr, "Возникла ошибка при чистке буфера потока!\n");
-      free(str);
-      str = NULL;
-      return errno;
-    }
   }
 
   return 0;
@@ -217,7 +195,7 @@ get_professor_from_stream(FILE* stream, char* professor) {
  */
 int
 get_year_from_stream(FILE* stream, int* year) {
-  printf("Введите курс: ");
+  printf("Введите курс[1, 10]: ");
   *year = -1;
   int err = 0;
   for (;;) {
@@ -240,7 +218,7 @@ get_year_from_stream(FILE* stream, int* year) {
  */
 int
 get_group_from_stream(FILE* stream, int* group) {
-  printf("Введите номер группы: ");
+  printf("Введите номер группы[1, 100]: ");
   *group = -1;
   int err = 0;
   for (;;) {
@@ -341,6 +319,7 @@ get_array_from_stream(FILE* stream, const int size, struct class** arr) {
     }
   }
 
+  return 0;
 }
 
 /*
