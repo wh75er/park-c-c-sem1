@@ -48,10 +48,10 @@ get_value_from_stream(FILE* stream, int* val) {
  * Считывание строки из потока
  */
 int
-get_string_from_stream(FILE* stream, char* str) {
+get_string_from_stream(FILE* stream, char** str) {
   bool is_string = false;
   while (is_string == false) {
-    int n = fscanf(stream, "%ms", &str);
+    int n = fscanf(stream, "%ms", str);
 
     if (n == 1) {
       is_string = true;
@@ -164,9 +164,9 @@ get_duration_from_stream(FILE* stream, int* duration) {
  * Заполнение названия предмета
  */
 int
-get_subject_from_stream(FILE* stream, char* subject) {
+get_subject_from_stream(FILE* stream, char** subject) {
   printf("Введите название предмета: ");
-  subject = NULL;
+  *subject = NULL;
   int err = 0;
   if ((err = get_string_from_stream(stream, subject))) {
     return err;
@@ -179,9 +179,9 @@ get_subject_from_stream(FILE* stream, char* subject) {
  * Заполнение имени преподавателя
  */
 int
-get_professor_from_stream(FILE* stream, char* professor) {
+get_professor_from_stream(FILE* stream, char** professor) {
   printf("Введите имя преподавателя: ");
-  professor = NULL;
+  *professor = NULL;
   int err = 0;
   if ((err = get_string_from_stream(stream, professor))) {
     return err;
@@ -271,14 +271,14 @@ get_object_from_stream(FILE* stream, struct class* obj) {
   (*obj).duration = duration;
 
   char* subject = NULL;
-  if ((err = get_subject_from_stream(stream, subject))) {
+  if ((err = get_subject_from_stream(stream, &subject))) {
     fprintf(stderr, "Возникла ошибка при чтении названия занятия!\n");
     return err;
   }
   (*obj).subject = subject;
 
   char* professor = NULL;
-  if ((err = get_professor_from_stream(stream, professor))) {
+  if ((err = get_professor_from_stream(stream, &professor))) {
     fprintf(stderr, "Возникла ошибка при чтении имени преподавателя!\n");
     return err;
   }
