@@ -7,6 +7,7 @@
 
 #include "input.h"
 #include "class.h"
+#include "pather.h"
 
 int   main(int, char**);
 

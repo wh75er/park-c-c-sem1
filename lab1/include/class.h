@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <errno.h>
+#include <string.h>
 
 struct class {
   int weekday;        /* День недели [0..6], 0 - ПН, 6 - ВС */
@@ -20,5 +21,7 @@ int   arralloc(const int, struct class**);
 void  init_fields(const int, struct class*);
 void  free_fields(const int, struct class*);
 void  arrfree(int, struct class*);
+int   copy(struct class * const, struct class *);
+void  swap(struct class * const, struct class * const);
 
 #endif
