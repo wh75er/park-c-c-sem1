@@ -104,14 +104,3 @@ copy(struct class * const src, struct class * dst) {
 
   return 0;
 }
-
-/*
- * Меняет местами два элемента массива
- */
-void
-swap(struct class * const a, struct class * const b) {
-  struct class temp;
-  temp = *a;
-  *a = *b;
-  *b = temp;
-}
