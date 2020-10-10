@@ -5,7 +5,7 @@
 
 #include "class.h"
 
-void  sort(const int, struct class * const, const int, int *);
-int   find_path(const int, const int, struct class * const, int *, struct class **);
+void  sort(const int, struct class * const, const int, const int, int *);
+int   find_path(const int, const int, const int, struct class * const, int *, struct class **);
 
 #endif

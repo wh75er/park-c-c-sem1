@@ -2,15 +2,15 @@
 
 /*
  * Сортирует массив и считает количество предметов для
- * указанной группы
+ * указанной группы, указанного курса
  */
 void
-sort(const int size, struct class* const arr, const int group_id, int* group_size) {
-  if (arr[0].group == group_id)
+sort(const int size, struct class* const arr, const int year, const int group_id, int* group_size) {
+  if (arr[0].year == year && arr[0].group == group_id)
     (*group_size)++;
 
   for (int i = 1; i < size; i++) {
-    if (arr[i].group == group_id)
+    if (arr[i].year == year && arr[i].group == group_id)
       (*group_size)++;
 
     struct class temp = arr[i];
@@ -31,11 +31,12 @@ sort(const int size, struct class* const arr, const int group_id, int* group_siz
 
 /*
  * Находит последовательный путь обхода всех предметов для указанной группы
+ * указаннного курса
  */
 int
-find_path(const int group_id, const int arr_size, struct class* const arr, int* path_size, struct class** path) {
+find_path(const int year, const int group_id, const int arr_size, struct class* const arr, int* path_size, struct class** path) {
   *path_size = 0;
-  sort(arr_size, arr, group_id, path_size);
+  sort(arr_size, arr, year, group_id, path_size);
 
   if (!(*path_size)) {
     return 0;
@@ -49,7 +50,7 @@ find_path(const int group_id, const int arr_size, struct class* const arr, int* 
   
   int path_index = 0;
   for (int i = 0; i < arr_size; i++) {
-    if (arr[i].group == group_id) {
+    if (arr[i].year == year && arr[i].group == group_id) {
       if (path_index < *path_size) {
         copy(&arr[i], &(*path)[path_index]);
         path_index++;

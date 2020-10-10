@@ -9,7 +9,7 @@
 
 #define BUFFER_SIZE 10
 
-int   get_user_input(FILE *, int *, struct class **);
+int   get_user_input(FILE *, int *, int *, int *, struct class **);
 
 int   get_value_from_stream(FILE *, int *);
 int   get_string_from_stream(FILE *, char **);

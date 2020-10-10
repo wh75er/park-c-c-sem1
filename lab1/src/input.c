@@ -4,9 +4,21 @@
  * Получение пользовательских данных
  */
 int
-get_user_input(FILE* stream, int* size, struct class** arr) {
-  printf("Пожалуйста, введите размер массива: ");
+get_user_input(FILE* stream, int* year, int* group_id, int* size, struct class** arr) {
+  printf("Пожалуйста, введите номер курса: ");
   int err = 0;
+  if ((err = get_value_from_stream(stream, size))) {
+    fprintf(stderr, "Возникла ошибка при получении номера курса!\n");
+    return err;
+  }
+
+  printf("Пожалуйста, введите номер группы: ");
+  if ((err = get_value_from_stream(stream, size))) {
+    fprintf(stderr, "Возникла ошибка при получении номера группы!\n");
+    return err;
+  }
+
+  printf("Пожалуйста, введите размер массива: ");
   if ((err = get_value_from_stream(stream, size))) {
     fprintf(stderr, "Возникла ошибка при получении размера массива!\n");
     return err;

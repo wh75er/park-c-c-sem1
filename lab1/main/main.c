@@ -9,16 +9,17 @@ int
 main(int argc, char *argv[]) {
   struct class* arr = NULL;
   int size = 0;
+  int year = 0;
+  int group_id = 0;
   int err = 0;
-  if ((err = get_user_input(stdin, &size, &arr))) {
+  if ((err = get_user_input(stdin, &year, &group_id, &size, &arr))) {
     error_handler(err, size, &arr, 0, NULL);
     exit(EXIT_FAILURE);
   }
 
-  int group_id = 2;
   int path_size = 0;
   struct class* path = NULL;
-  if ((err = find_path(group_id, size, arr, &path_size, &path))) {
+  if ((err = find_path(year, group_id, size, arr, &path_size, &path))) {
     error_handler(err, size, &arr, path_size, &path);
     exit(EXIT_FAILURE);
   }
