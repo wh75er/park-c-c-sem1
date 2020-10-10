@@ -6,6 +6,6 @@
 
 #include "class.h"
 
-void  error_handler(const int, const int, struct class **, const int, struct class **);
+void  error_handler(const int err, const int arr_size, struct class** arr, const int path_size, struct class** path);
 
 #endif
