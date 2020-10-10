@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.11)
 
 if(${CMAKE_VERSION} VERSION_LESS 3.18)
   cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
@@ -12,4 +12,4 @@ project(StructProject VERSION 1.0
 
 add_subdirectory(src)
 add_subdirectory(main)
-
+add_subdirectory(tests)

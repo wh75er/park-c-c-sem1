@@ -7,7 +7,7 @@
  */
 int
 main(int argc, char *argv[]) {
-  struct class* arr = NULL;
+  struct lesson* arr = NULL;
   int size = 0;
   int year = 0;
   int group_id = 0;
@@ -18,7 +18,7 @@ main(int argc, char *argv[]) {
   }
 
   int path_size = 0;
-  struct class* path = NULL;
+  struct lesson* path = NULL;
   if ((err = find_path(year, group_id, size, arr, &path_size, &path))) {
     error_handler(err, size, &arr, path_size, &path);
     exit(EXIT_FAILURE);

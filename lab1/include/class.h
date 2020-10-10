@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <string.h>
 
-struct class {
+struct lesson {
   int weekday;        /* День недели [0..6], 0 - ПН, 6 - ВС */
   int time;           /* Время начала в минутах 8:30 - 510, 20:30 - 1230 */
   bool lecture;       /* Лекция или семинар? */
@@ -17,10 +17,10 @@ struct class {
   int group;          /* Номер группы */
 };
 
-int   arralloc(const int, struct class**);
-void  init_fields(const int, struct class*);
-void  free_fields(const int, struct class*);
-void  arrfree(int, struct class**);
-int   copy(struct class * const, struct class *);
+int   arralloc(const int, struct lesson**);
+void  init_fields(const int, struct lesson*);
+void  free_fields(const int, struct lesson*);
+void  arrfree(int, struct lesson**);
+int   copy(struct lesson * const, struct lesson *);
 
 #endif

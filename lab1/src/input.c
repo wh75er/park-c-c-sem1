@@ -4,7 +4,7 @@
  * Получение пользовательских данных
  */
 int
-get_user_input(FILE* stream, int* year, int* group_id, int* size, struct class** arr) {
+get_user_input(FILE* stream, int* year, int* group_id, int* size, struct lesson** arr) {
   printf("Пожалуйста, введите номер курса: ");
   int err = 0;
   if ((err = get_value_from_stream(stream, size))) {
@@ -252,7 +252,7 @@ get_group_from_stream(FILE* stream, int* group) {
  * Заполнение одного объекта из потока по указателю
  */
 int
-get_object_from_stream(FILE* stream, struct class* obj) {
+get_object_from_stream(FILE* stream, struct lesson* obj) {
   int weekday = -1;
   int err = 0;
   if ((err = get_weekday_from_stream(stream, &weekday))) {
@@ -317,7 +317,7 @@ get_object_from_stream(FILE* stream, struct class* obj) {
  * Выделение памяти под массив и его заполнение из потока
  */
 int
-get_array_from_stream(FILE* stream, const int size, struct class** arr) {
+get_array_from_stream(FILE* stream, const int size, struct lesson** arr) {
   int err = 0;
   if ((err = arralloc(size, arr))) {
     fprintf(stderr, "Возникла ошибка при выделении памяти под массив!\n");

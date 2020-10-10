@@ -6,8 +6,8 @@
  * ошибки возвращает errno, в случае успеха 0;
  */
 int
-arralloc(const int size, struct class** arr) {
-  *arr = (struct class*)malloc(size * sizeof(struct class));
+arralloc(const int size, struct lesson** arr) {
+  *arr = (struct lesson*)malloc(size * sizeof(struct lesson));
   if (!(*arr)) {
     return errno;
   }
@@ -22,7 +22,7 @@ arralloc(const int size, struct class** arr) {
  * NULL значением
  */
 void
-init_fields(const int size, struct class* arr) {
+init_fields(const int size, struct lesson* arr) {
   for (int i = 0; i < size; i++) {
     arr[i].subject = NULL;
     arr[i].professor = NULL;
@@ -34,7 +34,7 @@ init_fields(const int size, struct class* arr) {
  * затирает значения указателей значением NULL
  */
 void
-free_fields(const int size, struct class* arr) {
+free_fields(const int size, struct lesson* arr) {
   if (!arr)
     return;
 
@@ -50,7 +50,7 @@ free_fields(const int size, struct class* arr) {
  * Высвобождает память массива.
  */
 void
-arrfree(const int size, struct class** arr) {
+arrfree(const int size, struct lesson** arr) {
   if (!arr)
     return;
 
@@ -63,7 +63,7 @@ arrfree(const int size, struct class** arr) {
  * Копирует элемент a в b
  */
 int
-copy(struct class * const src, struct class * dst) {
+copy(struct lesson * const src, struct lesson * dst) {
   (*dst).weekday = (*src).weekday;
   (*dst).time = (*src).time;
   (*dst).lecture = (*src).lecture;
