@@ -8,6 +8,7 @@
 #include "input.h"
 #include "class.h"
 #include "pather.h"
+#include "errors.h"
 
 int   main(int, char**);
 

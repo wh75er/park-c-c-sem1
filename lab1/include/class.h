@@ -20,7 +20,7 @@ struct class {
 int   arralloc(const int, struct class**);
 void  init_fields(const int, struct class*);
 void  free_fields(const int, struct class*);
-void  arrfree(int, struct class*);
+void  arrfree(int, struct class**);
 int   copy(struct class * const, struct class *);
 void  swap(struct class * const, struct class * const);
 

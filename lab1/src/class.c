@@ -35,6 +35,9 @@ init_fields(const int size, struct class* arr) {
  */
 void
 free_fields(const int size, struct class* arr) {
+  if (!arr)
+    return;
+
   for (int i = 0; i < size; i++) {
     free(arr[i].subject);
     free(arr[i].professor);
@@ -47,10 +50,13 @@ free_fields(const int size, struct class* arr) {
  * Высвобождает память массива.
  */
 void
-arrfree(const int size, struct class* arr) {
-  free_fields(size, arr);
-  free(arr);
-  arr = NULL;
+arrfree(const int size, struct class** arr) {
+  if (!arr)
+    return;
+
+  free_fields(size, *arr);
+  free(*arr);
+  *arr = NULL;
 }
 
 /*

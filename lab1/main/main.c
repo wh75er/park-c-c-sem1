@@ -8,14 +8,23 @@
 int
 main(int argc, char *argv[]) {
   struct class* arr = NULL;
-  int size;
-  int err = get_user_input(stdin, &size, &arr);
+  int size = 0;
+  int err = 0;
+  if ((err = get_user_input(stdin, &size, &arr))) {
+    error_handler(err, size, &arr, 0, NULL);
+    exit(EXIT_FAILURE);
+  }
 
   int group_id = 2;
   int path_size = 0;
   struct class* path = NULL;
-  err = find_path(group_id, size, arr, &path_size, &path);
+  if ((err = find_path(group_id, size, arr, &path_size, &path))) {
+    error_handler(err, size, &arr, path_size, &path);
+    exit(EXIT_FAILURE);
+  }
 
-  arrfree(size, arr);
-  arrfree(path_size, path);
+  arrfree(size, &arr);
+  arrfree(path_size, &path);
+
+  return 0;
 }
