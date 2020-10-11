@@ -14,9 +14,10 @@ endif()
 
 FetchContent_MakeAvailable(googletest)
 
-add_executable(testlib testlib.cpp)
 
-target_include_directories(testlib PUBLIC ../include)
-target_link_libraries(testlib gtest gtest_main)
+add_executable(testlib testlib.cpp)
 target_compile_features(testlib PRIVATE cxx_std_17)
 
+target_link_libraries(testlib PRIVATE input_lib class_lib pather_lib gtest gtest_main)
+
+add_test(NAME IzTest COMMAND testlib)
