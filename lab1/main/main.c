@@ -12,7 +12,7 @@ main(int argc, char *argv[]) {
   int year = 0;
   int group_id = 0;
   int err = 0;
-  if ((err = get_user_input(stdin, &year, &group_id, &size, &arr))) {
+  if ((err = get_user_input(stdin, stdout, &year, &group_id, &size, &arr))) {
     error_handler(err, size, &arr, 0, NULL);
     exit(EXIT_FAILURE);
   }
