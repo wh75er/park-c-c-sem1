@@ -20,7 +20,7 @@ struct lesson {
 int   arralloc(const int, struct lesson**);
 void  init_fields(const int, struct lesson*);
 void  free_fields(const int, struct lesson*);
-void  arrfree(int, struct lesson**);
+void  arrfree(const int, struct lesson**);
 int   copy(struct lesson * const, struct lesson *);
 
 #endif

@@ -7,13 +7,13 @@ int
 get_user_input(FILE* istream, FILE* ostream, int* year, int* group_id, int* size, struct lesson** arr) {
   fprintf(ostream, "Пожалуйста, введите номер курса: ");
   int err = 0;
-  if ((err = get_value_from_stream(istream, ostream, size))) {
+  if ((err = get_value_from_stream(istream, ostream, year))) {
     fprintf(stderr, "Возникла ошибка при получении номера курса!\n");
     return err;
   }
 
   fprintf(ostream, "Пожалуйста, введите номер группы: ");
-  if ((err = get_value_from_stream(istream, ostream, size))) {
+  if ((err = get_value_from_stream(istream, ostream, group_id))) {
     fprintf(stderr, "Возникла ошибка при получении номера группы!\n");
     return err;
   }

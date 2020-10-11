@@ -6,23 +6,26 @@
  */
 void
 sort(const int size, struct lesson* const arr, const int year, const int group_id, int* group_size) {
-  if (arr[0].year == year && arr[0].group == group_id)
+  if (arr[0].year == year && arr[0].group == group_id) {
     (*group_size)++;
+  }
 
   for (int i = 1; i < size; i++) {
-    if (arr[i].year == year && arr[i].group == group_id)
+    if (arr[i].year == year && arr[i].group == group_id) {
       (*group_size)++;
+    }
 
     struct lesson temp = arr[i];
     int j = i - 1;
 
     while (j >= 0) {
-      if (( temp.weekday < arr[j].weekday && temp.time < arr[j].time) || 
-          ( temp.weekday == arr[j].weekday && temp.time < arr[j].time)) {
+      if ((temp.weekday < arr[j].weekday) ||
+          (temp.weekday == arr[j].weekday && temp.time < arr[j].time)) {
         arr[j+1] = arr[j];
         j--;
-      } else 
+      } else  {
         break;
+      }
     }
     
     arr[j+1] = temp;
