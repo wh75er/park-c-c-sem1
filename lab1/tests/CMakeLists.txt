@@ -14,10 +14,23 @@ endif()
 
 FetchContent_MakeAvailable(googletest)
 
+set(LIBS input_lib class_lib pather_lib gtest gtest_main)
 
-add_executable(testlib testlib.cpp)
-target_compile_features(testlib PRIVATE cxx_std_17)
+file(GLOB tests "${PROJECT_SOURCE_DIR}/tests/*.cpp")
 
-target_link_libraries(testlib PRIVATE input_lib class_lib pather_lib gtest gtest_main)
+foreach(file ${tests})
+  set(name)
+  get_filename_component(name ${file} NAME_WE)
+  add_executable("${name}_tests"
+    ${sources}
+    ${file})
+  target_link_libraries("${name}_tests" ${LIBS})
+  add_test(NAME ${name} COMMAND "${name}_tests")
+endforeach()
 
-add_test(NAME IzTest COMMAND testlib)
+#add_executable(testinput input.cpp)
+#target_compile_features(testinput PRIVATE cxx_std_17)
+
+#target_link_libraries(testinput PRIVATE input_lib class_lib pather_lib gtest gtest_main)
+
+#add_test(NAME input COMMAND testinput)
