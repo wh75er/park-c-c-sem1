@@ -14,7 +14,7 @@ endif()
 
 FetchContent_MakeAvailable(googletest)
 
-set(LIBS input_lib class_lib pather_lib gtest gtest_main)
+set(LIBS pather_lib input_lib class_lib gtest gtest_main)
 
 file(GLOB tests "${PROJECT_SOURCE_DIR}/tests/*.cpp")
 
