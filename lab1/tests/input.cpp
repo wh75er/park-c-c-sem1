@@ -37,11 +37,12 @@ TEST(TestInputStream, WeekdayInputValidation) {
   int weekday = 0;
   int err = get_weekday_from_stream(in_stream, out_stream, &weekday);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(weekday, 2);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(weekday, 2);
 }
 
 TEST(TestInputStream, WeekdayInputValidationLeft) {
@@ -62,11 +63,12 @@ TEST(TestInputStream, WeekdayInputValidationLeft) {
   int weekday = 0;
   int err = get_weekday_from_stream(in_stream, out_stream, &weekday);
 
+  ASSERT_EQ(err, 0);
+  
+  EXPECT_EQ(weekday, 0);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(weekday, 0);
 }
 
 TEST(TestInputStream, WeekdayInputValidationRight) {
@@ -87,11 +89,13 @@ TEST(TestInputStream, WeekdayInputValidationRight) {
   int weekday = 0;
   int err = get_weekday_from_stream(in_stream, out_stream, &weekday);
 
+  
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(weekday, 6);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(weekday, 6);
 }
 
 /*
@@ -120,11 +124,13 @@ TEST(TestInputStream, TimeInputValidation) {
   int time = 0;
   int err = get_time_from_stream(in_stream, out_stream, &time);
 
+  
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(time, 600);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(time, 600);
 }
 
 TEST(TestInputStream, TimeInputValidationLeft) {
@@ -145,11 +151,12 @@ TEST(TestInputStream, TimeInputValidationLeft) {
   int time = 0;
   int err = get_time_from_stream(in_stream, out_stream, &time);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(time, 510);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(time, 510);
 }
 
 TEST(TestInputStream, TimeInputValidationRight) {
@@ -170,11 +177,12 @@ TEST(TestInputStream, TimeInputValidationRight) {
   int time = 0;
   int err = get_time_from_stream(in_stream, out_stream, &time);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(time, 1230);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(time, 1230);
 }
 
 /*
@@ -203,11 +211,12 @@ TEST(TestInputStream, LectureInputValidationLeft) {
   bool lecture = 0;
   int err = get_lecture_from_stream(in_stream, out_stream, &lecture);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(lecture, 0);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(lecture, 0);
 }
 
 TEST(TestInputStream, LectureInputValidationRight) {
@@ -228,11 +237,12 @@ TEST(TestInputStream, LectureInputValidationRight) {
   bool lecture = 0;
   int err = get_lecture_from_stream(in_stream, out_stream, &lecture);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(lecture, 1);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(lecture, 1);
 }
 
 /*
@@ -261,11 +271,12 @@ TEST(TestInputStream, DurationInputValidationLeft) {
   int duration = 0;
   int err = get_duration_from_stream(in_stream, out_stream, &duration);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(duration, 5);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(duration, 5);
 }
 
 TEST(TestInputStream, DurationInputValidationRight) {
@@ -286,11 +297,12 @@ TEST(TestInputStream, DurationInputValidationRight) {
   int duration = 0;
   int err = get_duration_from_stream(in_stream, out_stream, &duration);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(duration, 90);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(duration, 90);
 }
 
 /*
@@ -319,11 +331,12 @@ TEST(TestInputStream, YearInputValidationLeft) {
   int year = 0;
   int err = get_year_from_stream(in_stream, out_stream, &year);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(year, 1);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(year, 1);
 }
 
 TEST(TestInputStream, YearInputValidationRight) {
@@ -344,11 +357,12 @@ TEST(TestInputStream, YearInputValidationRight) {
   int year = 0;
   int err = get_year_from_stream(in_stream, out_stream, &year);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(year, 10);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(year, 10);
 }
 
 /*
@@ -377,11 +391,12 @@ TEST(TestInputStream, GroupInputValidationLeft) {
   int group = 0;
   int err = get_group_from_stream(in_stream, out_stream, &group);
 
+  ASSERT_EQ(err, 0);
+
+  EXPECT_EQ(group, 1);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(group, 1);
 }
 
 TEST(TestInputStream, GroupInputValidationRight) {
@@ -402,11 +417,11 @@ TEST(TestInputStream, GroupInputValidationRight) {
   int group = 0;
   int err = get_group_from_stream(in_stream, out_stream, &group);
 
+  ASSERT_EQ(err, 0);
+  EXPECT_EQ(group, 100);
+
   fclose(in_stream);
   fclose(out_stream);
-  
-  EXPECT_EQ(err, 0);
-  EXPECT_EQ(group, 100);
 }
 
 TEST(TestInputStream, ArrayInput) {
@@ -446,6 +461,8 @@ TEST(TestInputStream, ArrayInput) {
     int group_id = 0;
     int err = get_user_input(in_stream, out_stream, &year, &group_id, &size, &arr);
 
+    ASSERT_EQ(err, 0);
+
     ASSERT_NE(arr, nullptr);
     EXPECT_EQ(size, 5);
     EXPECT_EQ(year, 2);
@@ -462,9 +479,9 @@ TEST(TestInputStream, ArrayInput) {
       EXPECT_EQ(expected_arr[i].group, arr[i].group);
     }
 
-    fclose(in_stream);
-    fclose(out_stream);
-
     free(expected_arr);
     arrfree(size, &arr);
+
+    fclose(in_stream);
+    fclose(out_stream);
 }
