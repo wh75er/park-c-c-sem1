@@ -43,6 +43,9 @@ get_value_from_stream(FILE* istream, FILE* ostream, int* val) {
 
     if (n == 1) {
       is_number = true;
+    } else if (n == -1) {
+      fprintf(stderr, "Возникла ошибка при чтении буфера(EOF)\n");
+      return -1;
     } else if (!errno)  {
       fprintf(ostream, "Введенное вами значение не является числом. Повторите: ");
     } else {
@@ -67,6 +70,9 @@ get_string_from_stream(FILE* istream, FILE* ostream, char** str) {
 
     if (n == 1) {
       is_string = true;
+    } else if (n == -1) {
+      fprintf(stderr, "Возникла ошибка при чтении буфера(EOF)\n");
+      return -1;
     } else if (!errno)  {
       fprintf(ostream, "Введенное вами значение не является строкой. Повторите: ");
     } else {

@@ -80,7 +80,7 @@ copy(struct lesson * const src, struct lesson * dst) {
   if (src_str && dst_str) {
     memcpy(dst_str, src_str, strlen(src_str)+1);
   } else {
-    return -1;
+    return -2;
   }
   (*dst).subject = dst_str;
 
@@ -95,7 +95,7 @@ copy(struct lesson * const src, struct lesson * dst) {
   if (src_str && dst_str) {
     memcpy(dst_str, src_str, strlen(src_str)+1);
   } else {
-    return -1;
+    return -2;
   }
   (*dst).professor = dst_str;
   
