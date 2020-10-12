@@ -11,7 +11,7 @@ include(CodeCoverage)
 append_coverage_compiler_flags()
 setup_target_for_coverage_gcovr_html(
   NAME coverage
-  EXECUTABLE input_tests pather_tests
+  EXECUTABLE ctest
   BASE_DIRECTORY "${PROJECT_SOURCE_DIR}"
   EXCLUDE "build/*" "tests/*")
 
