@@ -14,6 +14,6 @@ jobs:
     - name: Configure
       run: cd lab1 && ./configure.sh
     - name: Make
-      run: cd build && make
+      run: cd lab1 && cd build && make
     - name: Test
-      run: cd build && make coverage
+      run: cd lab1 && cd build && make coverage
