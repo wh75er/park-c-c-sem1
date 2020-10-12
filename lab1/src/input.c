@@ -6,6 +6,7 @@
 int
 get_user_input(FILE* istream, FILE* ostream, int* year, int* group_id, int* size, struct lesson** arr) {
   fprintf(ostream, "Пожалуйста, введите номер курса: ");
+
   int err = 0;
   if ((err = get_value_from_stream(istream, ostream, year))) {
     fprintf(stderr, "Возникла ошибка при получении номера курса!\n");
@@ -38,6 +39,7 @@ get_user_input(FILE* istream, FILE* ostream, int* year, int* group_id, int* size
 int
 get_value_from_stream(FILE* istream, FILE* ostream, int* val) {
   bool is_number = false;
+
   while (is_number == false) {
     int n = fscanf(istream, "%d", val);
 
@@ -64,6 +66,8 @@ get_value_from_stream(FILE* istream, FILE* ostream, int* val) {
  */
 int
 get_string_from_stream(FILE* istream, FILE* ostream, char** str) {
+  *str = NULL;
+
   bool is_string = false;
   while (is_string == false) {
     int n = fscanf(istream, "%ms", str);
@@ -77,8 +81,8 @@ get_string_from_stream(FILE* istream, FILE* ostream, char** str) {
       fprintf(ostream, "Введенное вами значение не является строкой. Повторите: ");
     } else {
       fprintf(stderr, "Возникла ошибка при считывании значения!\n");
-      free(str);
-      str = NULL;
+      free(*str);
+      *str = NULL;
       return errno;
     }
 
@@ -94,6 +98,7 @@ get_string_from_stream(FILE* istream, FILE* ostream, char** str) {
 int
 get_weekday_from_stream(FILE* istream, FILE* ostream, int* weekday) {
   fprintf(ostream, "Введите день недели[0-ПН, 6-ВС]: ");
+
   *weekday = -1;
   int err = 0;
   for (;;) {
@@ -117,6 +122,7 @@ get_weekday_from_stream(FILE* istream, FILE* ostream, int* weekday) {
 int
 get_time_from_stream(FILE* istream, FILE* ostream, int* time) {
   fprintf(ostream, "Введите время начала занятия в минутах[8:30 - 510, 20:30 - 1230]: ");
+
   *time = -1;
   int err = 0;
   for (;;) {
@@ -140,6 +146,7 @@ get_time_from_stream(FILE* istream, FILE* ostream, int* time) {
 int
 get_lecture_from_stream(FILE* istream, FILE* ostream, bool* lecture) {
   fprintf(ostream, "Введите тип занятия[0 - семинар, 1 - лекция]: ");
+
   int type = -1;
   int err = 0;
   for (;;) {
@@ -161,6 +168,7 @@ get_lecture_from_stream(FILE* istream, FILE* ostream, bool* lecture) {
 int
 get_duration_from_stream(FILE* istream, FILE* ostream, int* duration) {
   fprintf(ostream, "Введите время продолжительности занятия в минутах[5 - 90]: ");
+
   *duration = -1;
   int err = 0;
   for (;;) {
@@ -184,6 +192,7 @@ get_duration_from_stream(FILE* istream, FILE* ostream, int* duration) {
 int
 get_subject_from_stream(FILE* istream, FILE* ostream, char** subject) {
   fprintf(ostream, "Введите название предмета: ");
+
   *subject = NULL;
   int err = 0;
   if ((err = get_string_from_stream(istream, ostream , subject))) {
@@ -199,6 +208,7 @@ get_subject_from_stream(FILE* istream, FILE* ostream, char** subject) {
 int
 get_professor_from_stream(FILE* istream, FILE* ostream, char** professor) {
   fprintf(ostream, "Введите имя преподавателя: ");
+
   *professor = NULL;
   int err = 0;
   if ((err = get_string_from_stream(istream, ostream, professor))) {
@@ -214,6 +224,7 @@ get_professor_from_stream(FILE* istream, FILE* ostream, char** professor) {
 int
 get_year_from_stream(FILE* istream, FILE* ostream, int* year) {
   fprintf(ostream, "Введите курс[1, 10]: ");
+
   *year = -1;
   int err = 0;
   for (;;) {
@@ -237,6 +248,7 @@ get_year_from_stream(FILE* istream, FILE* ostream, int* year) {
 int
 get_group_from_stream(FILE* istream, FILE* ostream, int* group) {
   fprintf(ostream, "Введите номер группы[1, 100]: ");
+
   *group = -1;
   int err = 0;
   for (;;) {

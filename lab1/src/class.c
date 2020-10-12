@@ -8,6 +8,7 @@
 int
 arralloc(const int size, struct lesson** arr) {
   *arr = (struct lesson*)malloc(size * sizeof(struct lesson));
+
   if (!(*arr)) {
     return errno;
   }
@@ -35,8 +36,9 @@ init_fields(const int size, struct lesson* arr) {
  */
 void
 free_fields(const int size, struct lesson* arr) {
-  if (!arr)
+  if (!arr) {
     return;
+  }
 
   for (int i = 0; i < size; i++) {
     free(arr[i].subject);
@@ -51,8 +53,9 @@ free_fields(const int size, struct lesson* arr) {
  */
 void
 arrfree(const int size, struct lesson** arr) {
-  if (!arr)
+  if (!arr) {
     return;
+  }
 
   free_fields(size, *arr);
   free(*arr);
@@ -77,6 +80,7 @@ copy(struct lesson * const src, struct lesson * dst) {
       return errno;
     }
   }
+
   if (src_str && dst_str) {
     memcpy(dst_str, src_str, strlen(src_str)+1);
   } else {
@@ -92,6 +96,7 @@ copy(struct lesson * const src, struct lesson * dst) {
       return errno;
     }
   }
+
   if (src_str && dst_str) {
     memcpy(dst_str, src_str, strlen(src_str)+1);
   } else {
