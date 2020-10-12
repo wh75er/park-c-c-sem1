@@ -9,9 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: configure
+    - name: Install gcovr
+      run: sudo pip install git+https://github.com/gcovr/gcovr.git
+    - name: Configure
       run: cd lab1 && ./configure.sh
-    - name: make
+    - name: Make
       run: cd build && make
-    - name: test
+    - name: Test
       run: cd build && make coverage
