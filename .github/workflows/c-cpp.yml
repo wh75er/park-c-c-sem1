@@ -13,6 +13,10 @@ jobs:
       run: sudo apt-get install -y valgrind
     - name: Install gcovr
       run: sudo apt-get install python3-setuptools && sudo pip3 install git+https://github.com/gcovr/gcovr.git
+    - name: Install cppcheck
+      run: sudo apt-get install -y cppcheck
+    - name: Run Linter
+      run: cd lab1/src && cppcheck *.c
     - name: Configure
       run: cd lab1 && ./configure.sh
     - name: Make
