@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install gcovr
-      run: sudo pip install git+https://github.com/gcovr/gcovr.git
+      run: sudo pip3 install git+https://github.com/gcovr/gcovr.git
     - name: Configure
       run: cd lab1 && ./configure.sh
     - name: Make
