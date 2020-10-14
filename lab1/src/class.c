@@ -109,3 +109,29 @@ copy(struct lesson * const src, struct lesson * dst) {
 
   return 0;
 }
+
+/*
+ * Выводит данные массива в указанный поток
+ */
+void arrprint(FILE* stream, const int size, const struct lesson * const arr)
+{
+  if(size <= 0) {
+    fprintf(stream, "Массив пуст!\n");
+    return;
+  }
+
+  for(int i = 0; i < size; i++) {
+    fprintf(stream, "%d Предмет из %d: \n", i+1, size);
+
+    fprintf(stream, "День недели: %d\n", arr[i].weekday);
+    fprintf(stream, "Время начала: %d\n", arr[i].time);
+    fprintf(stream, "Лекция: %d\n", arr[i].lecture);
+    fprintf(stream, "Продолжительность: %d\n", arr[i].duration);
+    fprintf(stream, "Название предмета: %s\n", arr[i].subject);
+    fprintf(stream, "Имя преподавателя: %s\n", arr[i].professor);
+    fprintf(stream, "Курс: %d\n", arr[i].year);
+    fprintf(stream, "Номер группы: %d\n", arr[i].group);
+
+    fprintf(stream, "---------n");
+  }
+}

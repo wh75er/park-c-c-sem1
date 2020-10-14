@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <string.h>
+#include <stdio.h>
 
 struct lesson {
   int weekday;        /* День недели [0..6], 0 - ПН, 6 - ВС */
@@ -22,5 +23,7 @@ void  init_fields(const int, struct lesson*);
 void  free_fields(const int, struct lesson*);
 void  arrfree(const int, struct lesson**);
 int   copy(struct lesson * const, struct lesson *);
+
+void arrprint(FILE*, const int, const struct lesson * const);
 
 #endif

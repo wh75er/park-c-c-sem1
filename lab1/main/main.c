@@ -24,6 +24,8 @@ main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
+  arrprint(stdout, path_size, path);
+
   arrfree(size, &arr);
   arrfree(path_size, &path);
 
