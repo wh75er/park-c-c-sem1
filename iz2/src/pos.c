@@ -5,7 +5,7 @@
  * with zeroes. If error occurs, returns errno, else 0
 */
 int
-arralloc(const size_t* size, struct pos** arr) {
+arralloc(const size_t size, struct pos** arr) {
   *arr = (struct pos*)malloc(size * sizeof(struct pos));
 
   if (!(*arr)) {
@@ -34,7 +34,7 @@ arrfree(struct pos** arr) {
  *  Copies array src to array dst 
 */
 int
-copy(const struct pos * const src, const struct pos * const dst, const size_t size) {
+copy(const struct pos * const src, struct pos * const dst, const size_t size) {
   if(!src || !dst) {
     return COPY_ERR;
   }
@@ -61,5 +61,5 @@ init_fields(const size_t size, struct pos* arr) {
 */
 void
 print(FILE* stream, const struct pos * const el) {
-  fprinf(stream, "%.4f %.4f %.4f", el->x, el->y, el->z);
+  fprintf(stream, "%.4f %.4f %.4f", el->x, el->y, el->z);
 }
