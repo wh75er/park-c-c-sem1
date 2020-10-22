@@ -5,7 +5,7 @@
 */
 int
 read_data_from_file(const char * const filename, FILE* fd, size_t* size, struct pos** const arr) {
-  buf_size = 2;
+  size_t buf_size = 2;
   struct pos* buf = (struct pos*)malloc(buf_size * sizeof(struct pos));
 
   if(!buf) {
@@ -37,7 +37,7 @@ read_data_from_file(const char * const filename, FILE* fd, size_t* size, struct 
     } else if(n != 3 && !errno) {
       fprintf(stderr, "Incorrect input value type! Only digits expected.\n");
       free(buf);
-      return TYPE_ERROR;
+      return TYPE_ERR;
     } else {
       fprintf(stderr, "Failed to read data from the stream!\n");
       free(buf);
@@ -46,7 +46,7 @@ read_data_from_file(const char * const filename, FILE* fd, size_t* size, struct 
   }
   
   int err = 0;
-  if((err = arralloc(size, arr))) {
+  if((err = arralloc(buf_idx, arr))) {
     fprintf(stderr, "Failed to allocate memory for array!\n");
     return err;
   }

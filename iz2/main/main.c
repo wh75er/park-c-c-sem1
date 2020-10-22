@@ -8,7 +8,16 @@
 int
 main(int argc, char *argv[]) {
 
-  printf("Init main\n");
+  char* input_fname = NULL;
+  char* output_fname = NULL;
+  int err = 0;
+  if((err = get_args(argc, argv, &input_fname, &output_fname))) {
+    error_handler(err, NULL);
+    exit(EXIT_FAILURE);
+  }
+
+  printf("Arg1: %s\n", input_fname);
+  printf("Arg2: %s\n", output_fname);
 
   return 0;
 }
