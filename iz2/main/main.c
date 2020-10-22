@@ -1,10 +1,9 @@
 #include "main.h"
 
 /*
- *    Программа находит среднее значение X-, Y-, Z-координаты массива трехмерных
- * радиус-векторов. Используется одна из двух реализаций: последовательная
- * или параллельная. Выбор реализации производится в зависимости от конфигурации
- * сборки.
+ *  Finds mean of X, Y, Z coords in radius-vector's array. Executable uses one of
+ * the proposed implementations: naive algorithm or process parallel algorithm.
+ * Implementation choice depends on build configuration
 */
 int
 main(int argc, char *argv[]) {
