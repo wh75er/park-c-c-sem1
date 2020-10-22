@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include "io.h"
+
 int   main(int, char**);
 
 #endif
