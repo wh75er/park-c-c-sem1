@@ -1,5 +1,5 @@
 add_executable(main main.c)
-target_include_directories(main PUBLIC ../include)
+target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_compile_features(main PRIVATE cxx_std_17)
 
