@@ -5,7 +5,7 @@
 */
 int
 read_data_from_file(const char * const filename, FILE* fd, size_t* size, struct pos** const arr) {
-  size_t buf_size = 2;
+  size_t buf_size = BUFFER_SIZE;
   struct pos* buf = (struct pos*)malloc(buf_size * sizeof(struct pos));
 
   if(!buf) {
