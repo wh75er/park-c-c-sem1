@@ -91,6 +91,21 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
 */
 int
 write_data_to_file(const char * const filename, const struct pos * const el) {
+  FILE* fd = fopen(filename, "w");
+
+  if(!fd) {
+    fprintf(stderr, "Failed to open file!\n");
+    return errno;
+  }
+
+  int err = 0;
+  if((err = write_data_to_stream(fd, el))) {
+    fprintf(stderr, "Failed to write data to the stream!\n");
+    return err;
+  }
+
+  fclose(fd);
+
   return 0;
 }
 
@@ -99,5 +114,12 @@ write_data_to_file(const char * const filename, const struct pos * const el) {
 */
 int
 write_data_to_stream(FILE * const fd, const struct pos * const el) {
+  int n = fprintf(fd, "%.2f %.2f %.2f\n", el->x, el->y, el->z);
+
+  if(n < 0) {
+    printf("Failed to write data into the file!\n");
+    return WRITE_ERR;
+  }
+  
   return 0;
 }

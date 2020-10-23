@@ -16,16 +16,25 @@ main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
-  printf("Arg1: %s\n", input_fname);
-  printf("Arg2: %s\n", output_fname);
-
-
   size_t size = 0;
   struct pos* arr = NULL;
   if((err = read_data_from_file(input_fname, &size, &arr))) {
     error_handler(err, &arr);
     exit(EXIT_FAILURE);
   }
+
+  struct pos mean = {0, 0, 0};
+  if((err = find_mean(arr, size, &mean))) {
+    error_handler(err, &arr);
+    exit(EXIT_FAILURE);
+  }
+
+  if((err = write_data_to_file(output_fname, &mean))) {
+    error_handler(err, &arr);
+    exit(EXIT_FAILURE);
+  }
+
+  arrfree(&arr);
 
   return 0;
 }

@@ -1,19 +1,19 @@
 #include "mean.h"
 
 /*
- *    Наивный метод поиска среднего каждой координаты
- * Результат складывается в структуру
+ *  Naive method for each coord mean calculation
+ * Result stored into the struct
 */
 int
-find_mean(const struct pos * const posns, const size_t size, struct pos * const mean) {
+find_mean(const struct pos * const arr, const size_t size, struct pos * const mean) {
   mean->x = 0;
   mean->y = 0;
   mean->z = 0;
 
   for(size_t i = 0; i < size; i++) {
-    mean.x += posns[i].x;
-    mean.y += posns[i].y;
-    mean.z += posns[i].z;
+    mean->x += arr[i].x;
+    mean->y += arr[i].y;
+    mean->z += arr[i].z;
   }
 
   mean->x /= size;

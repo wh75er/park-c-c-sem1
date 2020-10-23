@@ -5,6 +5,7 @@ enum custom_errors {
   TYPE_ERR = -2,
   COPY_ERR = -3,
   ARGS_ERR = -4,
+  WRITE_ERR = -5,
 };
 
 #endif

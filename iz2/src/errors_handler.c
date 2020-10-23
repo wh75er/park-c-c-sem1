@@ -13,6 +13,8 @@ error_handler(const int err, struct pos** arr) {
     fprintf(stderr, "Failed to copy data!\n");
   } else if (err == ARGS_ERR) {
     fprintf(stderr, "Arguments error!\n");
+  } else if (err == WRITE_ERR) {
+    fprintf(stderr, "Write error!\n");
   }
 
   arrfree(arr);
