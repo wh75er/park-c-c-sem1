@@ -7,6 +7,7 @@
 
 #include "io.h"
 #include "args.h"
+#include "mean.h"
 #include "errors.h"
 #include "errors_handler.h"
 
