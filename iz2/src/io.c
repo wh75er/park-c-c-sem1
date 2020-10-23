@@ -15,6 +15,7 @@ read_data_from_file(const char * const filename, size_t* size, struct pos** cons
   int err = 0;
   if((err = read_data_from_stream(fd, size, arr))) {
     fprintf(stderr, "Failed to read data from stream!\n");
+    fclose(fd);
     return err;
   }
 
@@ -40,13 +41,15 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
   for(;;) {
     if(buf_idx == buf_size) {
       buf_size *= 2;
-      buf = (struct pos*)realloc(buf, buf_size * sizeof(struct pos));
+      struct pos* new_buf = (struct pos*)realloc(buf, buf_size * sizeof(struct pos));
 
-      if(!buf) {
+      if(!new_buf) {
         fprintf(stderr, "Failed to reallocate memory!\n");
         free(buf);
         return errno;
       }
+      
+      buf = new_buf;
     }
 
     int n = fscanf(fd, "%f %f %f", 
@@ -101,6 +104,7 @@ write_data_to_file(const char * const filename, const struct pos * const el) {
   int err = 0;
   if((err = write_data_to_stream(fd, el))) {
     fprintf(stderr, "Failed to write data to the stream!\n");
+    fclose(fd);
     return err;
   }
 
