@@ -34,6 +34,14 @@ handle_errors(const int err, struct pos** arr) {
       fprintf(stderr, "Invalid params for data writing!\n");
     case ARRAY_CREATE_PARAMS_ERR :
       fprintf(stderr, "Invalid params for array creation!\n");
+    case NAIVE_MEAN_PARAMS_ERR :
+      fprintf(stderr, "Invalid params for naive mean calculation!\n");
+    case SUM_BORDERS_ERR :
+      fprintf(stderr, "Invalid borders for mean calculation function!Left border should be less than right border.\n");
+    case SUM_PARAMS_ERR :
+      fprintf(stderr, "Invalid params for parallel calculation function!\n");
+    case PARALLEL_PIPE_ERR :
+      fprintf(stderr, "Failed to create a pipe!\n");
   }
 
   if (err > 0) {

@@ -1,11 +1,11 @@
 #include "mean.h"
 
-/*
- *  Naive method for each coord mean calculation
- * Result stored into the struct
-*/
 int
 find_mean(const struct pos * const arr, const size_t size, struct pos * const mean) {
+  if(!arr || !mean) {
+    return NAIVE_MEAN_PARAMS_ERR; 
+  }
+
   mean->x = 0;
   mean->y = 0;
   mean->z = 0;
