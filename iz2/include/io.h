@@ -1,11 +1,12 @@
 #ifndef __IO_H__
 #define __IO_H__
 
-#include <stdio.h>
 #include <error.h>
+#include <stdio.h>
 
 #include "errors.h"
 #include "pos.h"
+#include "pos_array.h"
 
 #define BUFFER_SIZE 8
 

@@ -14,10 +14,8 @@ struct pos {
   float z;
 };
 
-int   arralloc(const size_t size, struct pos** arr);
 int   copy(const struct pos * const src, struct pos * const dst, const size_t size);
-void  arrfree(struct pos** arr);
-void  init_fields(const size_t size, struct pos* arr);
+void  init_fields(struct pos* el);
 void  print(FILE* stream, const struct pos * const arr);
 
 #endif

@@ -12,25 +12,25 @@ main(int argc, char *argv[]) {
 
   int err = 0;
   if((err = get_args(argc, argv, &input_fname, &output_fname))) {
-    error_handler(err, NULL);
+    handle_errors(err, NULL);
     exit(EXIT_FAILURE);
   }
 
   size_t size = 0;
   struct pos* arr = NULL;
   if((err = read_data_from_file(input_fname, &size, &arr))) {
-    error_handler(err, &arr);
+    handle_errors(err, &arr);
     exit(EXIT_FAILURE);
   }
 
   struct pos mean = {0, 0, 0};
   if((err = find_mean(arr, size, &mean))) {
-    error_handler(err, &arr);
+    handle_errors(err, &arr);
     exit(EXIT_FAILURE);
   }
 
   if((err = write_data_to_file(output_fname, &mean))) {
-    error_handler(err, &arr);
+    handle_errors(err, &arr);
     exit(EXIT_FAILURE);
   }
 

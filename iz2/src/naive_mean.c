@@ -20,5 +20,5 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
   mean->y /= size;
   mean->z /= size;
 
-  return 0;
+  return SUCCESS;
 }

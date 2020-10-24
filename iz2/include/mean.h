@@ -4,6 +4,7 @@
 #include <sys/sysinfo.h>
 
 #include "pos.h"
+#include "errors.h"
 
 int   find_mean(const struct pos * const arr, const size_t size, struct pos * const mean);
 

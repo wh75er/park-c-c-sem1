@@ -1,40 +1,38 @@
 #include "io.h"
 
-/*
- *  Reads data from file and stores it into array
-*/
 int
 read_data_from_file(const char * const filename, size_t* size, struct pos** const arr) {
+  if(!filename || !size || !arr) {
+    return READ_PARAMS_ERR;
+  }
+
   FILE* fd = fopen(filename, "r");
 
   if(!fd) {
-    fprintf(stderr, "Failed to open file!\n");
-    return errno;
+    return READ_OPEN_FILE_ERR;
   }
 
   int err = 0;
   if((err = read_data_from_stream(fd, size, arr))) {
-    fprintf(stderr, "Failed to read data from stream!\n");
     fclose(fd);
     return err;
   }
 
   fclose(fd);
 
-  return 0;
+  return SUCCESS;
 }
 
-/*
- *  Reads data from stream and stores it into array
-*/
 int
 read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
+  if(!fd || !size || !arr) {
+    return READ_PARAMS_ERR;
+  }
   size_t buf_size = BUFFER_SIZE;
   struct pos* buf = (struct pos*)malloc(buf_size * sizeof(struct pos));
 
   if(!buf) {
-    fprintf(stderr, "Failed to allocate memory!\n");
-    return errno;
+    return ALLOC_BUFFER_ERR;
   }
   
   size_t buf_idx = 0;
@@ -44,9 +42,8 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
       struct pos* new_buf = (struct pos*)realloc(buf, buf_size * sizeof(struct pos));
 
       if(!new_buf) {
-        fprintf(stderr, "Failed to reallocate memory!\n");
         free(buf);
-        return errno;
+        return REALLOC_BUFFER_ERR;
       }
       
       buf = new_buf;
@@ -59,26 +56,22 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
     if(n == EOF) {
       break;
     } else if(n != 3 && !errno) {
-      fprintf(stderr, "Incorrect input value type! Only digits expected.\n");
       free(buf);
       return TYPE_ERR;
     } else if (n != 3 && errno){
-      fprintf(stderr, "Failed to read data from the stream!\n");
       free(buf);
-      return errno;
+      return STREAM_READ_ERR;
     }
 
     buf_idx++;
   }
   
   int err = 0;
-  if((err = arralloc(buf_idx, arr))) {
-    fprintf(stderr, "Failed to allocate memory for array!\n");
+  if((err = create_array(buf_idx, arr))) {
     return err;
   }
 
   if((err = copy(buf, *arr, buf_idx))) {
-    fprintf(stderr, "Failed to copy memory from src array to dst array!\n");
     return err;
   }
 
@@ -86,44 +79,43 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
 
   free(buf);
 
-  return 0;
+  return SUCCESS;
 }
 
-/*
- *  Writes data into the specified file 
-*/
 int
 write_data_to_file(const char * const filename, const struct pos * const el) {
+  if(!filename || !el) {
+    return WRITE_PARAMS_ERR;
+  }
+
   FILE* fd = fopen(filename, "w");
 
   if(!fd) {
-    fprintf(stderr, "Failed to open file!\n");
-    return errno;
+    return WRITE_OPEN_FILE_ERR;
   }
 
   int err = 0;
   if((err = write_data_to_stream(fd, el))) {
-    fprintf(stderr, "Failed to write data to the stream!\n");
     fclose(fd);
     return err;
   }
 
   fclose(fd);
 
-  return 0;
+  return SUCCESS;
 }
 
-/*
- *  Writes data into the specified stream
-*/
 int
 write_data_to_stream(FILE * const fd, const struct pos * const el) {
+  if(!fd || !el) {
+    return WRITE_PARAMS_ERR;
+  }
+
   int n = fprintf(fd, "%.2f %.2f %.2f\n", el->x, el->y, el->z);
 
   if(n < 0) {
-    printf("Failed to write data into the file!\n");
     return WRITE_ERR;
   }
   
-  return 0;
+  return SUCCESS;
 }

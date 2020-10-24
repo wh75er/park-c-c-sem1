@@ -9,5 +9,5 @@ int get_args(int argc, char* argv[], char** const arg1, char** const arg2) {
   *arg1 = argv[1];
   *arg2 = argv[2];
 
-  return 0;
+  return SUCCESS;
 }
