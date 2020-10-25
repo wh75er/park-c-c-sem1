@@ -18,7 +18,7 @@ jobs:
     - name: Run Linter
       run: cd iz2/src && cppcheck *.c
     - name: Configure
-      run: cd iz2 && ./configure.sh
+      run: cd iz2 && ./configure.sh 0 Release
     - name: Make
       run: cd iz2 && cd build && make
         #    - name: Test
