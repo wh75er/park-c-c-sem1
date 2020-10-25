@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Конфигурационный файл для CI
 
@@ -15,9 +15,11 @@ if [[ $1 -eq 1 ]]; then
 fi
 
 if [[ -n $2 ]]; then
-  echo "Overriding TYPE=$TYPE with $1..."
-  TYPE=$1
+  echo "Overriding TYPE=$TYPE with $2..."
+  TYPE=$2
 fi
+
+echo "Configured TYPE=$TYPE and OPTIONS=$OPTIONS"
 
 mkdir build
 cd build

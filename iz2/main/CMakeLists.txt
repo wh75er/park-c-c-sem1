@@ -1,7 +1,7 @@
 add_executable(main main.c)
 target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-target_compile_features(main PRIVATE cxx_std_17)
+target_compile_features(main PRIVATE c_std_11)
 
 if (USE_PARALLEL)
   target_link_libraries(main PRIVATE pthread)
