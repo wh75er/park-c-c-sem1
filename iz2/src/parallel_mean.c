@@ -55,7 +55,10 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
   if(!(n = get_processes_number(size))) {
     return PARALLEL_PROC_BUSY_ERR;
   }
+
+#ifdef PROC_DEBUG
   printf("Number of processes: %d\n", n);
+#endif
 
   struct pos* shared_sum = mmap(NULL, sizeof(struct pos), 
                                 PROT_READ | PROT_WRITE,
@@ -86,10 +89,12 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       size_t left_border = offset * child_idx;
       size_t right_border = left_border + offset;
 
-      printf("Child(%d) left border: %d\n", nchildren[child_idx], left_border);
-      printf("Child(%d) right border: %d\n", nchildren[child_idx], right_border);
-      printf("Child(%d) offset: %d\n", nchildren[child_idx], offset);
+#ifdef PROC_DEBUG
+      printf("Child(%d) left border: %d\n", child_idx, left_border);
+      printf("Child(%d) right border: %d\n", child_idx, right_border);
+      printf("Child(%d) offset: %d\n", child_idx, offset);
       printf("\n");
+#endif
 
       if(right_border > size || child_idx + 1 == n) {
         right_border = size;
@@ -149,7 +154,9 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
     }    
   }
 
+#ifdef PROC_DEBUG
   print(stdout, shared_sum);
+#endif
 
   mean->x = shared_sum->x / size;
   mean->y = shared_sum->y / size;

@@ -5,6 +5,7 @@ project(ParallelProject VERSION 1.0
   LANGUAGES C CXX)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DPROC_DEBUG")
 
 # Добавление покрытия кода
 if (CMAKE_BUILD_TYPE MATCHES Debug)
