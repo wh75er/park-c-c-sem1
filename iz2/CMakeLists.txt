@@ -9,7 +9,7 @@ option(USE_PARALLEL "Using parallel implementation" OFF)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DPROC_DEBUG")
 
-# Добавление покрытия кода
+# Code coverage
 if (CMAKE_BUILD_TYPE MATCHES Debug)
   include(CodeCoverage)
   append_coverage_compiler_flags()
