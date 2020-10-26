@@ -20,5 +20,5 @@ init_fields(struct pos* el) {
 
 void
 print(FILE* stream, const struct pos * const el) {
-  fprintf(stream, "%.4f %.4f %.4f\n", el->x, el->y, el->z);
+  fprintf(stream, "%.4lf %.4lf %.4lf\n", el->x, el->y, el->z);
 }

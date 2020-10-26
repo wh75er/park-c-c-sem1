@@ -49,7 +49,7 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
       buf = new_buf;
     }
 
-    int n = fscanf(fd, "%f %f %f", 
+    int n = fscanf(fd, "%lf %lf %lf", 
                     &(buf[buf_idx].x), &(buf[buf_idx].y), &(buf[buf_idx].z)
                   );
 
@@ -113,7 +113,7 @@ write_data_to_stream(FILE * const fd, const struct pos * const el) {
     return WRITE_PARAMS_ERR;
   }
 
-  int n = fprintf(fd, "%.2f %.2f %.2f\n", el->x, el->y, el->z);
+  int n = fprintf(fd, "%.2lf %.2lf %.2lf\n", el->x, el->y, el->z);
 
   if(n < 0) {
     return WRITE_ERR;

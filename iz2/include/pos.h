@@ -9,9 +9,9 @@
 #include "errors.h"
 
 struct pos {
-  float x;
-  float y;
-  float z;
+  double x;
+  double y;
+  double z;
 };
 
 int   copy(const struct pos * const src, struct pos * const dst, const size_t size);
