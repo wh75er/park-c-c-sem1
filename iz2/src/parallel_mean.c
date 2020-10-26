@@ -56,7 +56,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
     return PARALLEL_PROC_BUSY_ERR;
   }
 
-#ifdef PROC_DEBUG
+#ifdef DEBUG
   printf("Number of processes: %d\n", n);
 #endif
 
@@ -89,7 +89,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       size_t left_border = offset * child_idx;
       size_t right_border = left_border + offset;
 
-#ifdef PROC_DEBUG
+#ifdef DEBUG
       printf("Child(%ld) left border: %ld\n", child_idx, left_border);
       printf("Child(%ld) right border: %ld\n", child_idx, right_border);
       printf("Child(%ld) offset: %ld\n", child_idx, offset);
@@ -154,7 +154,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
     }    
   }
 
-#ifdef PROC_DEBUG
+#ifdef DEBUG
   print(stdout, shared_sum);
 #endif
 
