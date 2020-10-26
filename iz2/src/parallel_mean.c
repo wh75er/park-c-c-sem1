@@ -46,8 +46,8 @@ get_sum(const struct pos * const arr, const size_t left_border, const size_t rig
 }
 
 int
-find_mean(const struct pos * const arr, const size_t size, struct pos * const mean) {
-  if(!arr || !size || !mean) {
+find_mean(struct pos ** const arr, const size_t size, struct pos * const mean) {
+  if(!arr || !(*arr) || !size || !mean) {
     return PARALLEL_PARAMS_ERR;
   }
 
@@ -70,7 +70,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
   }
 
   sem_t* mutex_sem = SEM_FAILED;
-  if ((mutex_sem = sem_open (SEM_MUTEX_NAME, O_CREAT, ACCESSPERMS, 1)) == SEM_FAILED) {
+  if ((mutex_sem = sem_open(SEM_MUTEX_NAME, O_CREAT, ACCESSPERMS, 1)) == SEM_FAILED) {
       munmap(shared_sum, sizeof(struct pos));
       return PARALLEL_SEM_OPEN_ERR;
     }
@@ -83,8 +83,6 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
 
       return PARALLEL_CHILD_CREATE_ERR;
     } else if(!nchildren[child_idx]) {
-      _exit(EXIT_SUCCESS);
-      /*
       size_t offset = size / n;
 
       size_t left_border = offset * child_idx;
@@ -103,7 +101,10 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
 
       struct pos sum = {0, 0, 0};
       int err = SUCCESS;
-      if((err = get_sum(arr, left_border, right_border, &sum))) {
+      if((err = get_sum(*arr, left_border, right_border, &sum))) {
+        free(*arr);
+        sem_close(mutex_sem);
+        unlink(SEM_MUTEX_NAME);
         _exit(err);
       }
 
@@ -114,11 +115,16 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       shared_sum->z += sum.z;
 
       if(sem_post(mutex_sem)) {
+        free(*arr);
+        sem_close(mutex_sem);
+        unlink(SEM_MUTEX_NAME);
         _exit(PARALLEL_SEM_POST_ERR);
       };
 
+      free(*arr);
+      sem_close(mutex_sem);
+      unlink(SEM_MUTEX_NAME);
       _exit(EXIT_SUCCESS);
-      */
     }
   }
 
@@ -155,7 +161,6 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       return PARALLEL_CHILD_FAILURE_ERR;
     }    
   }
-/*
 
 #ifdef DEBUG
   print(stdout, shared_sum);
@@ -165,7 +170,6 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
   mean->y = shared_sum->y / size;
   mean->z = shared_sum->z / size;
 
-  */
   munmap(shared_sum, sizeof(struct pos));
   sem_close(mutex_sem);
   unlink(SEM_MUTEX_NAME);

@@ -1,7 +1,7 @@
 #include "pos_array.h"
 
 int
-create_array(const size_t size, struct pos** arr) {
+create_array(const size_t size, struct pos** const arr) {
   if(arr == NULL || size == 0) {
     return ARRAY_CREATE_PARAMS_ERR;
   }
@@ -19,7 +19,7 @@ create_array(const size_t size, struct pos** arr) {
 }
 
 int
-arralloc(const size_t size, struct pos** arr) {
+arralloc(const size_t size, struct pos** const arr) {
   if(arr == NULL || size == 0) {
     return ALLOC_POS_ARRAY_PARAMS_ERR;
   }
@@ -34,7 +34,7 @@ arralloc(const size_t size, struct pos** arr) {
 }
 
 void
-arrfree(struct pos** arr) {
+arrfree(struct pos** const arr) {
   if(!arr) {
     return;
   }

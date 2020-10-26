@@ -24,7 +24,7 @@ main(int argc, char *argv[]) {
   }
 
   struct pos mean = {0, 0, 0};
-  if((err = find_mean(arr, size, &mean))) {
+  if((err = find_mean(&arr, size, &mean))) {
     handle_errors(err, &arr);
     exit(EXIT_FAILURE);
   }
