@@ -114,8 +114,6 @@ TEST(MeanTestSuite, ArithmeticProgressionMeanVolume33000000) {
   struct pos mean = {0, 0, 0};
 
   err = find_mean(&positions, size, &mean);
-  print(stdout, &mean_expected);
-  print(stdout, &mean);
   ASSERT_EQ(err, SUCCESS);
   ASSERT_EQ(cmp(&mean, &mean_expected), true);
 
