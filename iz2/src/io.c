@@ -68,10 +68,12 @@ read_data_from_stream(FILE * const fd, size_t* size, struct pos** const arr) {
   
   int err = 0;
   if((err = create_array(buf_idx, arr))) {
+    free(buf);
     return err;
   }
 
   if((err = copy(buf, *arr, buf_idx))) {
+    free(buf);
     return err;
   }
 
