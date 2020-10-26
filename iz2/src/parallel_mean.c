@@ -64,7 +64,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
                                 PROT_READ | PROT_WRITE,
                                 MAP_SHARED | MAP_ANONYMOUS,
                                 -1, 0);
-
+/*
   if(!shared_sum) {
     return PARALLEL_SHMEM_MAP_ERR;
   }
@@ -162,9 +162,10 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
   mean->y = shared_sum->y / size;
   mean->z = shared_sum->z / size;
 
+  */
   munmap(shared_sum, sizeof(struct pos));
-  sem_close(mutex_sem);
-  unlink(SEM_MUTEX_NAME);
+  //sem_close(mutex_sem);
+  //unlink(SEM_MUTEX_NAME);
 
   return SUCCESS;
 }
