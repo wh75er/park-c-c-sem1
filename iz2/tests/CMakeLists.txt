@@ -14,7 +14,7 @@ endif()
 
 FetchContent_MakeAvailable(googletest)
 
-set(LIBS pos gtest gtest_main)
+set(LIBS pos_array pos gtest gtest_main)
 set(PARALLEL_LIBS parallel_mean ${LIBS})
 set(NAIVE_LIBS naive_mean ${LIBS})
 

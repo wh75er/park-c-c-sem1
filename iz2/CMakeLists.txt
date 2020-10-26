@@ -22,7 +22,7 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
   append_coverage_compiler_flags()
   setup_target_for_coverage_gcovr_html(
     NAME coverage
-    EXECUTABLE valgrind --leak-check=full --show-leak-kinds=all ${PROJECT_BUILD_DIR}/tests/mean_tests#ctest -V
+    EXECUTABLE valgrind --leak-check=full --show-leak-kinds=all ctest -V
     BASE_DIRECTORY "${PROJECT_SOURCE_DIR}"
     EXCLUDE "${PROJECT_SOURCE_DIR}/build/*" 
     "${PROJECT_SOURCE_DIR}/tests/*" 
