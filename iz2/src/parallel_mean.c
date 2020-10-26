@@ -64,7 +64,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
                                 PROT_READ | PROT_WRITE,
                                 MAP_SHARED | MAP_ANONYMOUS,
                                 -1, 0);
-/*
+
   if(!shared_sum) {
     return PARALLEL_SHMEM_MAP_ERR;
   }
@@ -74,7 +74,6 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       munmap(shared_sum, sizeof(struct pos));
       return PARALLEL_SEM_OPEN_ERR;
     }
-
   pid_t nchildren[n];
   for(size_t child_idx = 0; child_idx < n; child_idx++) {
     if((nchildren[child_idx] = fork()) < 0) {
@@ -84,6 +83,8 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
 
       return PARALLEL_CHILD_CREATE_ERR;
     } else if(!nchildren[child_idx]) {
+      _exit(EXIT_SUCCESS);
+      /*
       size_t offset = size / n;
 
       size_t left_border = offset * child_idx;
@@ -117,6 +118,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       };
 
       _exit(EXIT_SUCCESS);
+      */
     }
   }
 
@@ -153,6 +155,7 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       return PARALLEL_CHILD_FAILURE_ERR;
     }    
   }
+/*
 
 #ifdef DEBUG
   print(stdout, shared_sum);
@@ -164,8 +167,8 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
 
   */
   munmap(shared_sum, sizeof(struct pos));
-  //sem_close(mutex_sem);
-  //unlink(SEM_MUTEX_NAME);
+  sem_close(mutex_sem);
+  unlink(SEM_MUTEX_NAME);
 
   return SUCCESS;
 }
