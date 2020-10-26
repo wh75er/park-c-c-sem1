@@ -90,9 +90,9 @@ find_mean(const struct pos * const arr, const size_t size, struct pos * const me
       size_t right_border = left_border + offset;
 
 #ifdef PROC_DEBUG
-      printf("Child(%d) left border: %d\n", child_idx, left_border);
-      printf("Child(%d) right border: %d\n", child_idx, right_border);
-      printf("Child(%d) offset: %d\n", child_idx, offset);
+      printf("Child(%ld) left border: %ld\n", child_idx, left_border);
+      printf("Child(%ld) right border: %ld\n", child_idx, right_border);
+      printf("Child(%ld) offset: %ld\n", child_idx, offset);
       printf("\n");
 #endif
 
