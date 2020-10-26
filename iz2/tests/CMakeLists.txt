@@ -14,7 +14,9 @@ endif()
 
 FetchContent_MakeAvailable(googletest)
 
-set(LIBS parallel_mean pos gtest gtest_main)
+set(LIBS pos gtest gtest_main)
+set(PARALLEL_LIBS parallel_mean ${LIBS})
+set(NAIVE_LIBS naive_mean ${LIBS})
 
 file(GLOB tests "${PROJECT_SOURCE_DIR}/tests/*.cpp")
 
@@ -24,6 +26,15 @@ foreach(file ${tests})
   add_executable("${name}_tests"
     ${sources}
     ${file})
-  target_link_libraries("${name}_tests" ${LIBS})
-  add_test(NAME ${name} COMMAND "${name}_tests")
+  target_link_libraries("${name}_tests" ${PARALLEL_LIBS})
+  if("${name}" STREQUAL "mean")
+    add_executable("naive_${name}_tests" 
+      ${sources}
+      ${file})
+    target_link_libraries("naive_${name}_tests" ${NAIVE_LIBS})
+    add_test(NAME naive_${name} COMMAND "naive_${name}_tests")
+    add_test(NAME parallel_${name} COMMAND "${name}_tests")
+  else()
+    add_test(NAME ${name} COMMAND "${name}_tests")
+  endif()
 endforeach()
