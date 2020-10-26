@@ -2,7 +2,7 @@
 
 int
 find_mean(const struct pos * const arr, const size_t size, struct pos * const mean) {
-  if(!arr || !mean) {
+  if(!arr || !size || !mean) {
     return NAIVE_MEAN_PARAMS_ERR; 
   }
 
