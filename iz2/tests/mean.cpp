@@ -1,3 +1,4 @@
+#include <chrono>
 #include <gtest/gtest.h>
 #include <iostream>
 
@@ -67,7 +68,14 @@ TEST(MeanTestSuite, AllOnesShouldReturnOnesVolume10) {
   struct pos mean_expected = {1, 1, 1};
   struct pos mean = {0, 0, 0};
 
+  auto start = std::chrono::system_clock::now();
+
   err = find_mean(&positions, size, &mean);
+
+  auto end = std::chrono::system_clock::now();
+  auto elapsed = end - start;
+  std::cout << "TIME: " << std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count() << "ms" << std::endl;
+
   ASSERT_EQ(err, SUCCESS);
   ASSERT_EQ(cmp(&mean, &mean_expected), true);
 
@@ -90,7 +98,14 @@ TEST(MeanTestSuite, ArithmeticProgressionMeanVolume100) {
   struct pos mean_expected = {exptd_value, exptd_value, exptd_value};
   struct pos mean = {0, 0, 0};
 
+  auto start = std::chrono::system_clock::now();
+
   err = find_mean(&positions, size, &mean);
+
+  auto end = std::chrono::system_clock::now();
+  auto elapsed = end - start;
+  std::cout << "TIME: " << std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count() << "ms" << std::endl;
+
   ASSERT_EQ(err, SUCCESS);
   ASSERT_EQ(cmp(&mean, &mean_expected), true);
 
@@ -113,7 +128,14 @@ TEST(MeanTestSuite, ArithmeticProgressionMeanVolume33000000) {
   struct pos mean_expected = {exptd_value, exptd_value, exptd_value};
   struct pos mean = {0, 0, 0};
 
+  auto start = std::chrono::system_clock::now();
+
   err = find_mean(&positions, size, &mean);
+
+  auto end = std::chrono::system_clock::now();
+  auto elapsed = end - start;
+  std::cout << "TIME: " << std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count() << "ms" << std::endl;
+
   ASSERT_EQ(err, SUCCESS);
   ASSERT_EQ(cmp(&mean, &mean_expected), true);
 
