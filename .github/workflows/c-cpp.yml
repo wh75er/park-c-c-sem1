@@ -23,10 +23,12 @@ jobs:
       run: cd iz2 && cd build && make
     - name: Test
       run: cd iz2 && cd build && make coverage
-    -name: Generate big file
+    -name: Prepare stress test
       run: cd iz2/tests/stress_tests && ./generate_big_file.sh
     -name: Stress test
-      run: cd iz2/tests/stress_tests && BUILD_DIR=../../build ./stress_test.sh
+      run: cd iz2/tests/stress_tests && ./stress_test.sh
+      env: 
+        BUILD_DIR: $GITHUB_WORKSPACE/iz2/build
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
       with:
