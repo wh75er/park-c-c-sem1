@@ -23,9 +23,9 @@ jobs:
       run: cd iz2 && cd build && make
     - name: Test
       run: cd iz2 && cd build && make coverage
-    -name: Prepare stress test
+    - name: Prepare stress test
       run: cd iz2/tests/stress_tests && ./generate_big_file.sh
-    -name: Stress test
+    - name: Stress test
       run: cd iz2/tests/stress_tests && ./stress_test.sh
       env: 
         BUILD_DIR: $GITHUB_WORKSPACE/iz2/build
