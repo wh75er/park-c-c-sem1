@@ -24,10 +24,14 @@ main(int argc, char *argv[]) {
   }
 
   struct pos mean = {0, 0, 0};
+  double start = omp_get_wtime();
   if((err = find_mean(&arr, size, &mean))) {
     handle_errors(err, &arr);
     exit(EXIT_FAILURE);
   }
+  double end = omp_get_wtime();
+
+  printf("Elapsed time: %lf\n", end - start);
 
   if((err = write_data_to_file(output_fname, &mean))) {
     handle_errors(err, &arr);
